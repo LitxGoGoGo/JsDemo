@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas id="canvas" style="width:8000px ;"></canvas>
+</body>
+
+<script>
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+
+  const startDate = new Date(2023, 0, 1); // Start date (1st Jan 2022)
+  const endDate = new Date(2023, 4, 31); // End date (31st Dec 2022)
+  const interval = 1000 * 60 * 60 * 24; // Interval (1 day)
+  const pxPerInterval = 3; // Pixels per interval
+
+  const numberOfIntervals = Math.ceil((endDate.getTime() - startDate.getTime()) / interval);
+  const canvasWidth = numberOfIntervals * pxPerInterval;
+
+  const today = new Date()
+  canvas.width = canvasWidth;
+  canvas.height = 50;
+
+
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = canvas.offsetWidth * dpr;
+  canvas.height = canvas.offsetHeight * dpr;
+
+
+  ctx.scale(dpr, dpr);
+
+  let currentDate = startDate;
+
+  ctx.fillRect(10,9,pxPerInterval*numberOfIntervals,1)
+
+  for (let i = 0; i < numberOfIntervals; i++) {
+    if (currentDate.getDate() === 1) {
+      ctx.beginPath();
+      ctx.arc(10 + i * pxPerInterval, 10, 4, 0, 2 * Math.PI);
+      ctx.fillStyle = "black"
+      ctx.fill();
+    }
+    let isToday = today.getDate() === currentDate.getDate() && today.getFullYear() === currentDate.getFullYear() && today.getMonth() === currentDate.getMonth()
+    if (isToday){
+      console.log(111)
+      ctx.beginPath();
+      ctx.arc(i * pxPerInterval, 10, 4, 0, 2 * Math.PI);
+      ctx.fillStyle = "red"
+      ctx.fill();
+    }
+    currentDate = new Date(currentDate.getTime() + interval);
+  }
+
+
+
+</script>
+
+</html>
