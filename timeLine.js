@@ -1,20 +1,20 @@
 let bbbb = [
-    { endTime: 1, tag: '(0,0)' },
-    { endTime: 8, tag: '(0,1)' },
-    { endTime: 9, tag: '(0,1)' },
-    { endTime: 1, tag: '(0,1)' },
-    { endTime: 9, tag: '(0,1)' },
-    { endTime: 7, tag: '(0,1)' },
-    { endTime: 12, tag: '(0,1)' },
-    { endTime: 10, tag: '(0,1)' },
-    { endTime: 2, tag: '(0,1)' },
-    { endTime: 2, tag: '(0,1)' },
-    { endTime: 3, tag: '(0,1)' },
-    { endTime: 4, tag: '(0,1)' },
-    { endTime: 5, tag: '(0,1)' },
-    { endTime: 5, tag: '(0,1)' },
-    { endTime: 5, tag: '(0,2)' }
-]
+  { endTime: 1, tag: '(0,0)' },
+  { endTime: 8, tag: '(0,1)' },
+  { endTime: 9, tag: '(0,1)' },
+  { endTime: 1, tag: '(0,1)' },
+  { endTime: 9, tag: '(0,1)' },
+  { endTime: 7, tag: '(0,1)' },
+  { endTime: 12, tag: '(0,1)' },
+  { endTime: 10, tag: '(0,1)' },
+  { endTime: 2, tag: '(0,1)' },
+  { endTime: 2, tag: '(0,1)' },
+  { endTime: 3, tag: '(0,1)' },
+  { endTime: 4, tag: '(0,1)' },
+  { endTime: 5, tag: '(0,1)' },
+  { endTime: 5, tag: '(0,1)' },
+  { endTime: 5, tag: '(0,2)' },
+];
 
 // 累加器
 //
@@ -26,207 +26,298 @@ let bbbb = [
 // reduce() 方法的名称中包含“reduce”这个词，是因为它可以将一个数组通过一个函数缩减为一个值，这个过程就好像在对数组进行“缩减”一样，因此被称为 reduce()。
 
 const result = bbbb.reduce((acc, curr) => {
-    const index = acc.findIndex(item => item[0].endTime === curr.endTime)
-    if (index === -1) {
-        acc.push([curr])
-    } else {
-        acc[index].push(curr)
-    }
-    return acc
-}, [])
+  const index = acc.findIndex((item) => item[0].endTime === curr.endTime);
+  if (index === -1) {
+    acc.push([curr]);
+  } else {
+    acc[index].push(curr);
+  }
+  return acc;
+}, []);
 // console.log(result)
 
 const cccc = [
-    [1, 0, 0, 0, 1],
-    [0, 0, 1, 1],
-    [1, 0, 1],
-    [0, 0, 0, 1, 1, 1, 1],
-    [1, 0, 0, 0, 0, 0, 0, 1],
-    [0, 0, 1]
-]
+  [1, 0, 0, 0, 1],
+  [0, 0, 1, 1],
+  [1, 0, 1],
+  [0, 0, 0, 1, 1, 1, 1],
+  [1, 0, 0, 0, 0, 0, 0, 1],
+  [0, 0, 1],
+];
 
 //数组对齐
 function duiqishuzu(arr) {
-    let maxHeight = 0
-    arr.forEach(subArr => {
-        maxHeight = Math.max(maxHeight, subArr.length)
-    })
-    // console.log(maxHeight)
-    for (const iterator of arr) {
-        for (let i = iterator.length; i < maxHeight; i++) {
-            iterator.push(0)
-        }
+  let maxHeight = 0;
+  arr.forEach((subArr) => {
+    maxHeight = Math.max(maxHeight, subArr.length);
+  });
+  // console.log(maxHeight)
+  for (const iterator of arr) {
+    for (let i = iterator.length; i < maxHeight; i++) {
+      iterator.push(0);
     }
-    return arr
+  }
+  return arr;
 }
 // console.log(duiqishuzu(cccc))
 
 function hadleArr(arr) {
-    let result = []
+  let result = [];
 
-    for (let i = 0; i < arr.length; i++) {
-        let tempArr = []
-        for (let j = 0; j < i; j++) {
-            tempArr.push(arr[j])
-        }
-        // console.log(tempArr)
-        for (let x = tempArr.length - 1; x >= 0; x--) {
-            if (arr[i] - tempArr[x] >= 8) {
-                result.push([
-                    { index: i, value: arr[i] },
-                    {
-                        index: x,
-                        value: tempArr[x]
-                    }
-                ])
-                break
-            }
-        }
+  for (let i = 0; i < arr.length; i++) {
+    let tempArr = [];
+    for (let j = 0; j < i; j++) {
+      tempArr.push(arr[j]);
     }
-    // console.log(result)
-    return result
+    // console.log(tempArr)
+    for (let x = tempArr.length - 1; x >= 0; x--) {
+      if (arr[i] - tempArr[x] >= 8) {
+        result.push([
+          { index: i, value: arr[i] },
+          {
+            index: x,
+            value: tempArr[x],
+          },
+        ]);
+        break;
+      }
+    }
+  }
+  // console.log(result)
+  return result;
 }
-let aaaa = [7, 9, 14, 18, 22, 25, 30, 31, 32, 40]
-hadleArr(aaaa)
+let aaaa = [7, 9, 14, 18, 22, 25, 30, 31, 32, 40];
+hadleArr(aaaa);
 
-let Gap = 8
-let Height = 1
+let Gap = 8;
+let Height = 1;
 let arr = [
-    [
-        { endTime: 1, tag: '(0,0)' },
-        { endTime: 1, tag: '(0,1)' },
-        { endTime: 1, tag: '(0,2)' }
-    ],
-    [
-        { endTime: 3, tag: '(1,0)' },
-        { endTime: 3, tag: '(1,1)' },
-        { endTime: 3, tag: '(1,2)' },
-        { endTime: 3, tag: '(1,3)' }
-    ],
-    [{ endTime: 4, tag: '(2,0)' }],
-    [{ endTime: 5, tag: '(2,0)' }],
-    [
-        { endTime: 8, tag: '(3,0)' },
-        { endTime: 8, tag: '(3,1)' },
-        { endTime: 8, tag: '(3,2)' },
-        { endTime: 8, tag: '(3,3)' },
-        { endTime: 8, tag: '(3,4)' }
-    ],
-    [
-        { endTime: 12, tag: '(3,0)' },
-        { endTime: 12, tag: '(3,1)' },
-        { endTime: 12, tag: '(3,2)' },
-        { endTime: 12, tag: '(3,3)' },
-        { endTime: 12, tag: '(3,4)' }
-    ],
-    [
-        { endTime: 14, tag: '(4,0)' },
-        { endTime: 14, tag: '(4,1)' },
-        { endTime: 14, tag: '(4,2)' }
-    ],
-    [{ endTime: 15, tag: '(4,0)' }],
-    [{ endTime: 19, tag: '(4,0)' }]
-]
+  [
+    { endTime: 1, tag: '(0,0)' },
+    { endTime: 1, tag: '(0,1)' },
+    { endTime: 1, tag: '(0,2)' },
+  ],
+  [
+    { endTime: 3, tag: '(1,0)' },
+    { endTime: 3, tag: '(1,1)' },
+    { endTime: 3, tag: '(1,2)' },
+    { endTime: 3, tag: '(1,3)' },
+  ],
+  [{ endTime: 4, tag: '(2,0)' }],
+  [{ endTime: 5, tag: '(2,0)' }],
+  [
+    { endTime: 8, tag: '(3,0)' },
+    { endTime: 8, tag: '(3,1)' },
+    { endTime: 8, tag: '(3,2)' },
+    { endTime: 8, tag: '(3,3)' },
+    { endTime: 8, tag: '(3,4)' },
+  ],
+  [
+    { endTime: 12, tag: '(3,0)' },
+    { endTime: 12, tag: '(3,1)' },
+    { endTime: 12, tag: '(3,2)' },
+    { endTime: 12, tag: '(3,3)' },
+    { endTime: 12, tag: '(3,4)' },
+  ],
+  [
+    { endTime: 14, tag: '(4,0)' },
+    { endTime: 14, tag: '(4,1)' },
+    { endTime: 14, tag: '(4,2)' },
+  ],
+  [{ endTime: 15, tag: '(4,0)' }],
+  [{ endTime: 19, tag: '(4,0)' }],
+];
 
 function getArr(arr) {
-    let height = 1
-    let result = []
-    let myArray = [[]]
-    arr = arr.sort((a, b) => {
-        return a[0].endTime - b[0].endTime
-    })
+  let height = 1;
+  let result = [];
+  let myArray = [[]];
+  arr = arr.sort((a, b) => {
+    return a[0].endTime - b[0].endTime;
+  });
 
-    for (let index = 0; index < arr.length; index++) {
-        let myIndex = 0
-        let tempIndex = index
-        let bianjietiaojian = index
-        if (result.length === 0) {
-            result.push(
-                arr[index].map(item => {
-                    myArray[index].push(1)
-                    return {
-                        ...item,
-                        myHeight: height++
-                    }
-                })
-            )
-            continue
-        }
-        if (index > 0) {
-            let tempArr = []
-            for (let i = 0; i < index; i++) {
-                tempArr.push(arr[i])
-            }
-            // console.log(tempArr)
-            for (let x = tempArr.length - 1; x >= 0; x--) {
-                // 设置最小间隔
-                if (arr[index][0].endTime - tempArr[x][0].endTime > 5) {
-                    let msg = {
-                        msg: '找到了',
-                        arrindex: `index:${index},value:${arr[index][0].endTime}`,
-                        tempArrindex: `index:${x},value:${tempArr[x][0].endTime}`
-                    }
-                    console.log(msg)
-                    if (index - x === 1) {
-                        console.log('我们是邻居')
-                        myArray.push(arr[index].map(() => 1))
-                    } else {
-                        // let tempCountArr = myArray.slice(x + 1, index)
-                        // let huoArr = quHuo(tempCountArr)
-                        // console.log('myArray', myArray)
-                        console.log('myArray.slice(x + 1, index)', myArray.slice(x + 1, index))
-                        // console.log('huoArr', huoArr)
-                        myArray.push([])
-                    }
-                    break
-                } else {
-                    if (x - 1 < 0) {
-                        console.log('大胆你没有配对的')
-                        console.log(`index:${index},value:${arr[index][0].endTime}`)
-                        myArray.push([])
-                        while (myArray[index].length < myArray[index - 1].length) {
-                            myArray[index].push(0)
-                        }
-                        for (let y = 0; y < arr[index].length; y++) {
-                            myArray[index].push(1)
-                        }
-                    }
-                }
-            }
-            // console.log(myArray)
-        }
+  for (let index = 0; index < arr.length; index++) {
+    let myIndex = 0;
+    let tempIndex = index;
+    let bianjietiaojian = index;
+    if (result.length === 0) {
+      result.push(
+        arr[index].map((item) => {
+          myArray[index].push(1);
+          return {
+            ...item,
+            myHeight: height++,
+          };
+        }),
+      );
+      continue;
     }
-    console.log(myArray)
+    if (index > 0) {
+      let tempArr = [];
+      for (let i = 0; i < index; i++) {
+        tempArr.push(arr[i]);
+      }
+      // console.log(tempArr)
+      for (let x = tempArr.length - 1; x >= 0; x--) {
+        // 设置最小间隔
+        if (arr[index][0].endTime - tempArr[x][0].endTime > 5) {
+          let msg = {
+            msg: '找到了',
+            arrindex: `index:${index},value:${arr[index][0].endTime}`,
+            tempArrindex: `index:${x},value:${tempArr[x][0].endTime}`,
+          };
+          console.log(msg);
+          if (index - x === 1) {
+            console.log('我们是邻居');
+            myArray.push(arr[index].map(() => 1));
+          } else {
+            // let tempCountArr = myArray.slice(x + 1, index)
+            // let huoArr = quHuo(tempCountArr)
+            // console.log('myArray', myArray)
+            console.log(
+              'myArray.slice(x + 1, index)',
+              myArray.slice(x + 1, index),
+            );
+            // console.log('huoArr', huoArr)
+            myArray.push([]);
+          }
+          break;
+        } else {
+          if (x - 1 < 0) {
+            console.log('大胆你没有配对的');
+            console.log(`index:${index},value:${arr[index][0].endTime}`);
+            myArray.push([]);
+            while (myArray[index].length < myArray[index - 1].length) {
+              myArray[index].push(0);
+            }
+            for (let y = 0; y < arr[index].length; y++) {
+              myArray[index].push(1);
+            }
+          }
+        }
+      }
+      // console.log(myArray)
+    }
+  }
+  console.log(myArray);
 
-    // console.log('result', result)
-    return result
+  // console.log('result', result)
+  return result;
 }
 
 function formatArray(arr) {}
 function compareTime(current, before) {
-    return current - before > Gap
+  return current - before > Gap;
 }
 
-getArr(arr)
+getArr(arr);
 
 function quHuo(arr) {
-    const result = []
+  const result = [];
 
-    let maxLen = 0
-    arr.forEach(subArr => {
-        maxLen = Math.max(maxLen, subArr.length)
-    })
+  let maxLen = 0;
+  arr.forEach((subArr) => {
+    maxLen = Math.max(maxLen, subArr.length);
+  });
 
-    const newArr = arr.map(subArr => [...subArr, ...new Array(maxLen - subArr.length).fill(0)])
+  const newArr = arr.map((subArr) => [
+    ...subArr,
+    ...new Array(maxLen - subArr.length).fill(0),
+  ]);
 
-    for (let i = 0; i < maxLen; i++) {
-        let orValue = 0
-        newArr.forEach(subArr => {
-            orValue |= subArr[i]
-        })
-        result.push(orValue)
-    }
-    return result
+  for (let i = 0; i < maxLen; i++) {
+    let orValue = 0;
+    newArr.forEach((subArr) => {
+      orValue |= subArr[i];
+    });
+    result.push(orValue);
+  }
+  return result;
 }
 
-console.log(quHuo(cccc))
+console.log(quHuo(cccc));
+
+function feibo(n) {
+  if (n == 0) {
+    return 0;
+  }
+  if (n == 1) {
+    return 1;
+  }
+  return feibo(n - 1) + feibo(n - 2);
+}
+
+function jiecheng(n) {
+  if (n === 0) {
+    return 1;
+  }
+  if (n === 1) {
+    return 1;
+  }
+
+  return jiecheng(n - 1) * n;
+}
+
+function jieliu(myfun, mytime) {
+  let timer = null;
+  return function () {
+    if (!timer) {
+      timer = setTimeout(() => {
+        myfun().apply(this.arguments);
+      }, mytime);
+    }
+  };
+}
+
+let res = [];
+
+for (let i = 0; i < array.length; i++) {
+  let flag = false;
+  let temp = null;
+
+  for (let x of res) {
+    if (x.has(i)) {
+      flag = true;
+      temp = res[myi];
+    }
+    break;
+  }
+
+  if (!flag) {
+    let set = new Set();
+    set.add(i);
+    res.push(set);
+    temp = set;
+  }
+
+  for (let j = i + 1; j < array.length; j++) {
+    if (array[i][j] == 1) {
+      temp.add(j);
+    }
+  }
+}
+
+function backtrack(candidates, path, k, res, startindex) {
+  // 递归结束条件：当路径和等于目标值时，将当前路径加入结果集
+  if (path.length === k) {
+    res.push([...path]);
+    return;
+  }
+
+  // 遍历所有可能的选择
+  for (
+    let i = startindex;
+    i <= candidates.length - (k - path.length) + 1;
+    i++
+  ) {
+    // 剪枝：如果当前元素已经在路径中出现过，或者当前元素会导致路径和超过目标值，则跳过
+    // 选择当前元素，并将其加入路径
+    path.push(candidates[i]);
+    // 递归搜索所有可能的路径
+    backtrack(candidates, path, k, res, startindex);
+    // 撤销选择，回溯到上一层
+    path.pop();
+  }
+
+  return res;
+}
